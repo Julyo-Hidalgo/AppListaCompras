@@ -21,10 +21,10 @@ namespace AppListaCompras.Helper
             return _connection.InsertAsync(p);
         }
 
-        public void update(Produto p)
+        public Task<List<Produto>> update(Produto p)
         {
-            string sql = "UPDATE Produto set desc = ?, qnt = ?, preco = ? where id = ?";
-            _connection.QueryAsync<Produto>(sql, p.desc, p.qnt, p.preco, p.id);
+            string sql = "UPDATE Produto SET desc=?, qnt=?, preco=? where id=? ";
+            return _connection.QueryAsync<Produto>(sql, p.desc, p.qnt, p.preco, p.id);
         }
 
         public void delete(int id)
@@ -35,6 +35,13 @@ namespace AppListaCompras.Helper
         public Task<List<Produto>> getAll()
         {
             return _connection.Table<Produto>().ToListAsync();
+        }
+
+        public Task<List<Produto>> search(string q)
+        {
+            string sql = "select * from Produto where desc like '%" + q + "%' ";
+
+            return _connection.QueryAsync<Produto>(sql);
         }
     }
 }

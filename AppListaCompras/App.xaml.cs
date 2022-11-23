@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AppListaCompras.View;
 
 namespace AppListaCompras
 {
@@ -31,7 +32,7 @@ namespace AppListaCompras
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new View.Listagem());
         }
 
         protected override void OnStart()

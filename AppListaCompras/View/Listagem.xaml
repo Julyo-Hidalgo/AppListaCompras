@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppListaCompras.View.Listagem"
+             Title="Lista de Produtos">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="tbi_somar" Text="Somar" Clicked="tbi_somar_Clicked"/>
+        <ToolbarItem x:Name="tbi_novo" Text="Novo" Clicked="tbi_novo_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="10">
+                <SearchBar x:Name="sb_busca" Placeholder="Qual produto?" TextChanged="sb_busca_TextChanged"/>
+
+                <RefreshView x:Name="refresh_view" IsRefreshing="True">
+                    <ListView x:Name="lv_produto" ItemSelected="lv_produto_ItemSelected">
+                        <ListView.Header>
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto, Auto">
+                                <Label Grid.Row="0" Grid.Column="0" Text="Descrição:"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="Quantidade:"/>
+                                <Label Grid.Row="0" Grid.Column="2" Text="Preço:"/>
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Remover" Clicked="MenuItem_Clicked" />
+                                    </ViewCell.ContextActions>
+
+                                    <Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto, Auto">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding desc}"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding qnt}"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding preco}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </RefreshView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
